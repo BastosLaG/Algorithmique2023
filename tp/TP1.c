@@ -38,27 +38,79 @@ int coeffBinomialfact(int n, int k);
 
 int main () {
 	int test1 = 0;
-    int test2 = 1;
+    int test2 = 0;
     int test3 = 1;
 
+    clock_t start_t, end_t;
+    double total_t;
+
     if (test1){
+        start_t = clock();
         printf("%d\n",puissance(6,8)); //O -> b
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+
+        start_t = clock();
         printf("%d\n",puissanceR(6,8)); //O -> b
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+
+        start_t = clock();
         printf("%d\n",puissanceQ(6,8)); //O -> log b
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
     }
 
     if (test2){
+        start_t = clock();
         printf("%lld\n",fibonacciR(10)); //O -> 2^n
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+
+        start_t = clock();
         printf("%lld\n",fibonacci(10)); //O -> 2^n
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+
+        start_t = clock();
         printf("%lld\n",fibonacciLog(10)); //O -> log n
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
     }
 
     if (test3){
 		int n = 5, m = 3;
+        
+        start_t = clock();
         printPascalTriangle(n+1);
-		printf("%d\n",coeffBinomialR(n,m)); //O -> 2*n
-		printf("%d\n",coeffBinomialItab(n,m)); 
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+		
+        start_t = clock();
+        printf("%d\n",coeffBinomialR(n,m)); //O -> 2*n
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+		
+        start_t = clock();
+        printf("%d\n",coeffBinomialItab(n,m)); 
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+
+        start_t = clock();
 		printf("%d\n",coeffBinomialIvec(n,m)); 
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Total time taken by CPU: %f\n", total_t  );
+
     }
     return 0;
 }
