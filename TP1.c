@@ -38,7 +38,7 @@ int coeffBinomialfact(int n, int k);
 
 int main () {
 	int test1 = 0;
-    int test2 = 0;
+    int test2 = 1;
     int test3 = 1;
 
     if (test1){
@@ -187,7 +187,6 @@ ullint fibonacciLog(int n){
 
 paire fiblog (int n){
   paire mi, res;
-  ullint fi;
   int i;
 
   if (n < 2) {
