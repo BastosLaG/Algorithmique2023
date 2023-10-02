@@ -14,31 +14,6 @@ void affiche (int sizex, int sizey, monplan pl);
 void droite (int x0, int y0, int x1, int y1, monplan pl);
 void droite_br (int u, int v, monplan pl);
 
-int main() {
-
-    int array [] = { 54, 85, 20, 63, 21 };
-    size_t size = sizeof( int ) * 5;
-    int length;
-
-    /* Display the initial values */
-    for( length=0; length<5; length++) {
-        printf( "%d ", array[ length ] );
-    }
-    printf( "\n" );
-
-    /* Reset the memory bloc */
-    memset( array, 0, size );
-
-    /* Display the new values */
-    for( length=0; length<5; length++) {
-        printf( "%d ", array[ length ] );
-    }
-    printf( "\n" );
-    
-    return 0;
-}
-
-
 int main (int argc, char ** argv) {
 	int sizex, sizey, dx, dy, i, j;
 	monplan plan;

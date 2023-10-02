@@ -15,9 +15,6 @@ https://jj.up8.site/AA/AA22_TP_Droites.html
 void trivial (int a, int b);
 void trivialf (int a, int b);
 
-
-
-
 int main(void){
 
     trivial(5, 2);

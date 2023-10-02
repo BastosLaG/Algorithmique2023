@@ -1,4 +1,4 @@
-nomprenom = Bastien_Capiaux_21002589
+NomPrenom = Bastien_Capiaux_21002589
 version = V.1
 tp = TP2
 
@@ -12,4 +12,4 @@ clean:
 	rm *.o prog
 
 dist: 
-	tar -czvf $(tp)_$(NomPrenom)_$(version).tar.gz ./$(tp).c
+	tar -czvf $(tp)_$(NomPrenom)_$(version).tar.gz $(tp).c makefile
