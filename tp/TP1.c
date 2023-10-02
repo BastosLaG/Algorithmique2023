@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include<assert.h>
 #include<time.h>
 
@@ -32,7 +33,7 @@ void printPascalTriangle(int n);
 int coeffBinomialR(int n, int m);
 int coeffBinomialItab(int n, int m);
 int coeffBinomialIvec(int n, int m);
-// rajouter Itérative incrémentale
+// int coeffBinomialIncremental(int n, int m);
 int factorial(int n);
 int coeffBinomialfact(int n, int k);
 
@@ -113,17 +114,19 @@ int main () {
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
         printf("Delta temps : %f\n\n", total_t  );
 
-        start_t = clock();
-		printf("Coeff binomial factorielle : %d\n",coeffBinomialfact(n,m)); 
+        printf("Coeff binomial factorielle : %d\n",coeffBinomialfact(n,m)); 
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
         printf("Delta temps : %f\n\n", total_t  );
 
+        start_t = clock();
+        // printf("Coeff binomial incrementale : %d\n", coeffBinomialIncremental(n, m));
+        end_t = clock();
+        total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        // printf("Delta temps : %f\n\n", total_t);
     }
     return 0;
 }
-
-
 
 // Multiplication 
 int mult (int a, int b){
@@ -304,8 +307,6 @@ int coeffBinomialItab(int n, int m){
 	}
    return t0[n][m] ;
 }
-
-
 
 int coeffBinomialIvec(int n, int m){
     int temp, prev;
