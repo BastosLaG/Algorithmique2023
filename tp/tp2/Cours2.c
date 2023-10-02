@@ -98,25 +98,22 @@ void bresenham(int u, int v){
         delta = ((2*u*y) +u) - (2*v*x);
         putpixel(x, y);
     }
-    
 }
 
 void bresenham2(int u, int v){
-    int delta, x, y, inth, intd;
-    inth = -v - v;
-    intd = u + u + inth;
-    delta = u;
-    y = 0;
-    for (x = 0; x <= u; x++)
-    {
-        if (delta < 0){
-            y++;
-            delta += intd;
-        }
-        else{
-            delta += inth;
-        }
+/* u est dx, v est dy */
+    int x, y, delta, incD, incH;
+	incH   = v << 1;
+	delta  = incH - u;
+   	incD   = delta - u;
+   	for (x = 0, y = 0; x <= u; x++) {
+		if (delta > 0) {
+			y++;
+			delta += incD;
+		}
+		else {
+			delta += incH;
+		}
         putpixel(x, y);
-    }
-    
+   	}
 }

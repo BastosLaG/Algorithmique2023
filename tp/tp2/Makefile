@@ -1,8 +1,15 @@
-prog: TP2.o
-	gcc -o prog TP2.o && ./prog
+nomprenom = Bastien_Capiaux_21002589
+version = V.1
+tp = TP2
 
-TP2.o: TP2.c
-	gcc -c -Wextra -Wall TP2.c
+prog: $(tp).o
+	gcc -o prog $(tp).o
+
+TP$(tp).o: $(tp).c
+	gcc -c -Wextra -Wall $(tp).c
 
 clean: 
 	rm *.o prog
+
+dist: 
+	tar -czvf $(tp)_$(NomPrenom)_$(version).tar.gz ./$(tp).c
