@@ -4,6 +4,9 @@
 #include<assert.h>
 #include<time.h>
 
+#define ITER 100
+#define MAX 10
+
 typedef unsigned long long int ullint;
 struct paire {
   ullint fun;
@@ -46,77 +49,112 @@ int main () {
     double total_t;
 
     if (test1){
-        int n = 2, m = 16;
+        int n, i, j;
         start_t = clock();
-        printf("\npuissance : %d\n",puissance(n,m)); //O -> b
+        for (i = 1; i < ITER; i++){
+            for (j = 1; j < MAX; j++) n = puissance(j, i);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("\npuissance : \n"); //O -> b
         printf("Delta temps : %f\n", total_t  );
 
         start_t = clock();
-        printf("\npuissance récursif : %d\n",puissanceR(n,m)); //O -> b
+        for (i = 1; i < ITER; i++){
+            for (j = 1; j < MAX; j++) n = puissanceR(j, i);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("\npuissance récursif : \n"); //O -> b
         printf("Delta temps : %f\n", total_t  );
 
         start_t = clock();
-        printf("\nPuissance binaire : %d\n",puissanceQ(n,m)); //O -> log b
+        for (i = 1; i < ITER; i++){
+            for (j = 1; j < MAX; j++) n = puissanceQ(j, i);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("\nPuissance binaire : \n"); //O -> log b
         printf("Delta temps : %f\n\n", total_t  );
     }
 
     if (test2){
-        int n = 15;
+        int n, i, j;
         start_t = clock();
-        printf("\nFibonnacci récursif : %lld\n",fibonacciR(n)); //O -> 2^n
+        for (i = 1; i < ITER; i++){
+            for (j = 1; j < MAX; j++) n = fibonacciR(j);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("\nFibonnacci récursif : \n"); //O -> 2^n
         printf("Delta temps : %f\n", total_t  );
 
         start_t = clock();
-        printf("\nFibonnacci récursif terminal : %lld\n",fibonacci(n)); //O -> 2^n
+        for (i = 1; i < ITER; i++){
+            for (j = 1; j < MAX; j++) n = fibonacci(j);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("\nFibonnacci récursif terminal : \n"); //O -> 2^n
         printf("Delta temps : %f\n", total_t  );
 
         start_t = clock();
-        printf("\nFibonnacci logaritmique : %lld\n",fibonacciLog(n)); //O -> log n
+        for (i = 1; i < ITER; i++){
+            for (j = 1; j < MAX; j++) n = fibonacciLog(j);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("\nFibonnacci logaritmique : \n"); //O -> log n
         printf("Delta temps : %f\n\n", total_t  );
     }
 
     if (test3){
-		int n = 10, m = 8;
-        
+		int n, i, j;
+
         start_t = clock();
-        printPascalTriangle(n+1);
+        printPascalTriangle(10);
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
         printf("Delta temps : %f\n\n", total_t  );
 		
         start_t = clock();
-        printf("Coeff binomial récursive : %d\n",coeffBinomialR(n,m)); //O -> 2*n
+        for (i = 1; i < ITER; i++){
+            for (j = i+1; j < MAX; j++) n = coeffBinomialR(j, i);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Coeff binomial récursive : \n"); //O -> 2*n
         printf("Delta temps : %f\n\n", total_t  );
 		
         start_t = clock();
-        printf("Coeff binomial itératif tableau : %d\n",coeffBinomialItab(n,m)); 
+        for (i = 1; i < ITER; i++){
+            for (j = i+1; j < MAX; j++) n = coeffBinomialItab(j, i);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+        printf("Coeff binomial itératif tableau : \n"); 
         printf("Delta temps : %f\n\n", total_t  );
 
         start_t = clock();
-		printf("Coeff binomial itératif vecteur : %d\n",coeffBinomialIvec(n,m)); 
+        for (i = 1; i < ITER; i++){
+            for (j = i+1; j < MAX; j++) n = coeffBinomialIvec(j, i);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+		printf("Coeff binomial itératif vecteur : \n"); 
         printf("Delta temps : %f\n\n", total_t  );
 
+<<<<<<< HEAD:tp/TP1.c
         printf("Coeff binomial factorielle : %d\n",coeffBinomialfact(n,m)); 
+=======
+        start_t = clock();
+        for (i = 1; i < ITER; i++){
+            for (j = i+1; j < MAX; j++) n = coeffBinomialfact(j, i);
+        }
+>>>>>>> 9352bdbdf2ab2b96749f6e7ba4100271897ab272:tp/tp1/TP1.c
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+		printf("Coeff binomial factorielle : \n"); 
         printf("Delta temps : %f\n\n", total_t  );
 
         start_t = clock();
