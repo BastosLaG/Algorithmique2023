@@ -144,24 +144,25 @@ int main () {
 		printf("Coeff binomial itératif vecteur : \n"); 
         printf("Delta temps : %f\n\n", total_t  );
 
-<<<<<<< HEAD:tp/TP1.c
-        printf("Coeff binomial factorielle : %d\n",coeffBinomialfact(n,m)); 
-=======
         start_t = clock();
         for (i = 1; i < ITER; i++){
-            for (j = i+1; j < MAX; j++) n = coeffBinomialfact(j, i);
+            for (j = i+1; j < MAX; j++) {
+                n = coeffBinomialfact(j, i);
+            }
         }
->>>>>>> 9352bdbdf2ab2b96749f6e7ba4100271897ab272:tp/tp1/TP1.c
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 		printf("Coeff binomial factorielle : \n"); 
         printf("Delta temps : %f\n\n", total_t  );
 
         start_t = clock();
-        // printf("Coeff binomial incrementale : %d\n", coeffBinomialIncremental(n, m));
+        for (i = 1; i < ITER; i++){
+            // for (j = i+1; j < MAX; j++) n = coeffBinomialIncremental(j, i);
+        }
         end_t = clock();
         total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-        // printf("Delta temps : %f\n\n", total_t);
+        printf("Coeff binomial incrementale : \n");
+        printf("Delta temps : %f\n\n", total_t);
     }
     return 0;
 }
@@ -335,15 +336,15 @@ int coeffBinomialR(int n, int m){
 }
 
 int coeffBinomialItab(int n, int m){
-	int ** t0 = malloc(m* sizeof(int*));
+	int ** t0 = malloc(ITER* sizeof(int*));
 	for(int i = 0; i <= n; ++i){
-		int * t1 = malloc(n * sizeof(int));
+		int * t1 = malloc(ITER * sizeof(int));
 		t0[i] = t1;
 		for( int j = 0; j < i; ++j)
 			t1[j] = t0[i-1][j] + t0[i-1][j-1];
 		t0[i][i] = 1;
 	}
-   return t0[n][m] ;
+    return t0[n][m];
 }
 
 int coeffBinomialIvec(int n, int m){

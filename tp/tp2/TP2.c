@@ -64,61 +64,6 @@ int main (int argc, char ** argv) {
 	if (dy >= MAX)
 		dy = MAX - 1;
 
-	memset (plan, ' ', MAX*MAX);
-	droite_triviale_verif (11, 3, plan);
-	printf("Triviale\n");
-	affiche (11, 3, plan);
-
-	memset (plan, ' ', MAX*MAX);
-	droite_triviale_verif (24, 10, plan);
-	affiche (24, 10, plan);
-
-	memset (plan, ' ', MAX*MAX);
-	droite_br_verif (11, 3, plan);
-	printf("Bresenham\n");
-	affiche (11, 3, plan);
-	
-	memset (plan, ' ', MAX*MAX);
-	droite_br_verif (24, 10, plan);
-	affiche (24, 10, plan);
-	
-	memset (plan, ' ', MAX*MAX);
-	droite_rvw_verif (11, 3, plan);
-	printf("Rokne\n");
-	affiche (11, 3, plan);
-	
-	memset (plan, ' ', MAX*MAX);
-	droite_rvw_verif (24, 10, plan);
-	affiche (24, 10, plan);
-
-	t0 = clock();
-	for (i = 0; i < dx; i++) {
-		for (j = 0; j < dy; j++) {
-			droite_triviale (i, j, plan);
-		}
-	}
-	t1 = clock();
-	printf("triviale %d\n", (int) (t1 - t0));
-	t0 = clock();
-	for (i = 0; i < dx; i++) {
-		for (j = 0; j < dy; j++) {
-			droite_br (i, j, plan);
-		}
-	}
-	t1 = clock();
-	printf("Bresenham %d\n", (int) (t1 - t0));
-	t0 = clock();
-	for (i = 0; i < dx; i++) {
-		for (j = 0; j < i; j++) {
-		droite_rvw (i, j, plan);
-		}
-		for (j = 0; j < i; j++) {
-		droite_rvw (i, j, plan);
-		}
-	}
-	t1 = clock();
-	printf("Rokne %d\n", (int) (t1 - t0));
-
 }
 
 void droite_triviale (int u, int v, monplan pl) {
