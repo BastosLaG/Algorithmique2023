@@ -48,19 +48,8 @@ typedef struct arbrebv {
 arbrebv_t creeretremplir (int);
 void afficharbrevec (arbrebv_t, int);
 int compte_n_vec(arbrebv_t);
-
 int is_in_arbre_vec (arbrebv_t, float);
-int is_in_arbre_vec (arbrebv_t a, float n){
-  int i, nbcases, temp;
-  nbcases = a.nbn;
-  for (i = 0; i < nbcases; i++) {
-    temp = (i << 1) + 1;
-    if (a.vec[temp].val == n || a.vec[temp+1].val == n) {
-      return 1;
-    }
-  }
-  return 0;
-}
+
 arbrebv_t is_noeud_in_arbre_vec (arbrebv_t, float);
 arbrebv_t is_noeud_in_arbre_vec (arbrebv_t, float){
 
@@ -130,9 +119,6 @@ int main () {
     else printf("La valeur %f n'est pas dans l'arbre\n",test);
 
     printf("%d\n",is_in_arbre_vec(a2, test));
-    
-    
-
   }
 }
 
@@ -282,23 +268,6 @@ void range_arbre(arbre* a){
 /*----------------------------------------------------------------*/
 // arbre V2
 
-/*
-typedef struct paire {
-  int num;
-  float val;
-} paire_t;
-
-typedef struct arbrebv {
-  int nbn;
-  paire_t * vec;
-} arbrebv_t;
-*/
-int compte_n_vec(arbrebv_t a){
-  return a.nbn;
-}
-
-
-
 arbrebv_t creeretremplir (int n) {
 /* n est le nombre de noeuds */
   arbrebv_t a;
@@ -330,6 +299,7 @@ arbrebv_t creeretremplir (int n) {
  }
   return a;
 }
+
 void afficharbrevec (arbrebv_t a, int noeud) {
   int i;
   if (noeud > a.nbn)
@@ -339,3 +309,25 @@ void afficharbrevec (arbrebv_t a, int noeud) {
   printf("%5d %5.3f\n", a.vec[noeud].num, a.vec[noeud].val);
   afficharbrevec ( a, i+1) ; // n*2 + 2
 }
+
+int compte_n_vec(arbrebv_t a){
+  return a.nbn;
+}
+
+int is_in_arbre_vec (arbrebv_t a, float n){
+  int i, nbcases, temp;
+  nbcases = a.nbn;
+  for (i = 0; i < nbcases; i++) {
+    temp = (i << 1) + 1;
+    if (a.vec[temp].val == n || a.vec[temp+1].val == n) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+
+
+
+
