@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <assert.h>
 
 #define MAX(i, j) (((i) > (j)) ? (i) : (j))
 
+/*----------------------------------------------------------------*/
+// arbre V1 
 struct noeud {
   int num;
   float val;
@@ -21,41 +24,85 @@ void voisarbre (arbre, int);
 arbre ajout (arbre, int, float);
 arbre creation (int);
 
-/*----------------------------------------------------------------*/
-// arbre V1 
 int compte_n(arbre);
 int is_in_arbre (arbre, float);
 arbre is_noeud_in_arbre (arbre, float);
 int profondeur_noeud_in_arbre(arbre, arbre);
 void range_arbre(arbre*);
+
 /*----------------------------------------------------------------*/
 // arbre V2
 
+typedef struct paire {
+  int num;
+  float val;
+} paire_t;
+
+typedef struct arbrebv {
+  int nbn;
+  paire_t * vec;
+} arbrebv_t;
+
+#define INT_MIN 0
+
+arbrebv_t creeretremplir (int);
+void afficharbrevec (arbrebv_t, int);
+int compte_n_vec(arbrebv_t);
+
+int is_in_arbre_vec (arbrebv_t, float);
+int is_in_arbre_vec (arbrebv_t a, float n){
+  int i, nbcases, temp;
+  nbcases = a.nbn;
+  for (i = 0; i < nbcases; i++) {
+    temp = (i << 1) + 1;
+    if (a.vec[temp].val == n || a.vec[temp+1].val == n) {
+      return 1;
+    }
+  }
+  return 0;
+}
+arbrebv_t is_noeud_in_arbre_vec (arbrebv_t, float);
+arbrebv_t is_noeud_in_arbre_vec (arbrebv_t, float){
+
+}
+int profondeur_noeud_in_arbre_vec(arbrebv_t, arbrebv_t);
+int profondeur_noeud_in_arbre_vec(arbrebv_t, arbrebv_t){
+
+}
+void range_arbre_vec(arbrebv_t*);
+void range_arbre_vec(arbrebv_t*){
+
+}
 
 int main () {
   int n, v1, v2;
+  float test;
   arbre a, b, c;
-  v1 = 1;
+  arbrebv_t a2, b2, c2;
+  
+  v1 = 0;
   v2 = 1;
   n = 20;
-  a = creation (n);
-  afficharbre (a);
-  printf("\n\n");
-  voisarbre (a,0);
-
+  test = 1.2f;
+  
   /*---------------------------------------------------------------*/  
   // arbre V1
   if (v1){
+    a = creation (n);
+    afficharbre (a);
+    printf("\n\n");
+    voisarbre (a,0);
+
     printf("\n\nNombre de noeud : %d\n",compte_n (a));
 
-    if (is_in_arbre(a, 1.2f)) printf("La valeur %f est dans l'arbre\n",1.2f);
-    else printf("La valeur %f n'est pas dans l'arbre\n",1.2f);
-    printf("%d\n",is_in_arbre(a, 1.2f));
+    if (is_in_arbre(a, test)) printf("La valeur %f est dans l'arbre\n",test);
+    else printf("La valeur %f n'est pas dans l'arbre\n",test);
 
-    c = is_noeud_in_arbre(a, 1.2f);
+    printf("%d\n",is_in_arbre(a, test));
+
+    c = is_noeud_in_arbre(a, test);
     if (c) printf("num : %d / val : %f\n", c->num, c->val);
-    else printf("La valeur 1.2f n'a pas été trouvée dans l'arbre.\n");
-
+    else printf("La valeur test n'a pas été trouvée dans l'arbre.\n");
     printf("Profondeur de c : %d\n", profondeur_noeud_in_arbre(a, c));
 
     b = a;
@@ -65,20 +112,28 @@ int main () {
     printf("\n\n");
     voisarbre (b,0);
 
-    c = is_noeud_in_arbre(b, 1.2f);
+    c = is_noeud_in_arbre(b, test);
     if (c) printf("num : %d / val : %f\n", c->num, c->val);
-    else printf("La valeur 1.2f n'a pas été trouvée dans l'arbre.\n");
-
+    else printf("La valeur test n'a pas été trouvée dans l'arbre.\n");
     printf("Profondeur de c : %d\n", profondeur_noeud_in_arbre(b, c));
-  } 
+  }
+
   /*----------------------------------------------------------------*/
   // arbre V2
   if (v2){
+    a2 = creeretremplir(n);
+    afficharbrevec(a2, 0);
+
+    printf("Nombre de noeud : %d\n", compte_n_vec(a2));
+
+    if (is_in_arbre_vec(a2, test)) printf("La valeur %f est dans l'arbre\n",test);
+    else printf("La valeur %f n'est pas dans l'arbre\n",test);
+
+    printf("%d\n",is_in_arbre_vec(a2, test));
     
+    
+
   }
-  
-
-
 }
 
 arbre ajout (arbre a, int v, float x) {
@@ -222,4 +277,65 @@ void range_arbre(arbre* a){
     if ((*a)->sg) range_arbre(&((*a)->sg));
     if ((*a)->sd) range_arbre(&((*a)->sd));
   }
+}
+
+/*----------------------------------------------------------------*/
+// arbre V2
+
+/*
+typedef struct paire {
+  int num;
+  float val;
+} paire_t;
+
+typedef struct arbrebv {
+  int nbn;
+  paire_t * vec;
+} arbrebv_t;
+*/
+int compte_n_vec(arbrebv_t a){
+  return a.nbn;
+}
+
+
+
+arbrebv_t creeretremplir (int n) {
+/* n est le nombre de noeuds */
+  arbrebv_t a;
+  int i, nbs, nbcases, num;
+  float x, y;
+  x = 1.5;
+  y = 0.21;
+  nbs = n;
+  nbcases = (n << 1) + 1;
+  num = nbcases;
+  a.nbn = n;
+  a.vec = malloc (nbcases * sizeof(paire_t));
+  assert (a.vec);
+  for (i = 0; i < nbs; i++) {
+    a.vec[i].num = num;
+    a.vec[i].val = x;
+    if (i & 0x01)
+      num++;
+    else
+      num -= 3;
+    x += y;
+    y += 0.06;
+    if (x > 3.0 || x < -2.0)
+      y = - y;
+  }
+ for (i = nbs; i < nbcases; i++) {
+    a.vec[i].num = INT_MIN;
+    a.vec[i].val = 0.0;
+ }
+  return a;
+}
+void afficharbrevec (arbrebv_t a, int noeud) {
+  int i;
+  if (noeud > a.nbn)
+    return;
+  i = (noeud << 1) + 1; // n*2 + 1 
+  afficharbrevec ( a, i) ;
+  printf("%5d %5.3f\n", a.vec[noeud].num, a.vec[noeud].val);
+  afficharbrevec ( a, i+1) ; // n*2 + 2
 }
