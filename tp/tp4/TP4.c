@@ -50,16 +50,38 @@ void afficharbrevec (arbrebv_t, int);
 int compte_n_vec(arbrebv_t);
 int is_in_arbre_vec (arbrebv_t, float);
 
-arbrebv_t is_noeud_in_arbre_vec (arbrebv_t, float);
-arbrebv_t is_noeud_in_arbre_vec (arbrebv_t, float){
-
+paire_t* is_noeud_in_arbre_vec (arbrebv_t, float);
+paire_t* is_noeud_in_arbre_vec (arbrebv_t a , float n){
+  int i, nbcases, temp;
+  nbcases = a.nbn;
+  for (i = 0; i < nbcases; i++) {
+    temp = (i << 1) + 1;
+    if (a.vec[temp].val == n) {
+      return &a.vec[temp];
+    }
+    else if (a.vec[temp+1].val == n){
+      return &a.vec[temp+1];
+    }
+  }
+  return NULL;
 }
-int profondeur_noeud_in_arbre_vec(arbrebv_t, arbrebv_t);
-int profondeur_noeud_in_arbre_vec(arbrebv_t, arbrebv_t){
 
+int profondeur_noeud_in_arbre_vec(arbrebv_t, paire_t);
+int profondeur_noeud_in_arbre_vec(arbrebv_t a, paire_t b){
+  int i, nbcases, temp, res;
+  nbcases = a.nbn;
+  res = 0;
+  for (i = 0; i < nbcases; i++) {
+    temp = (i << 1) + 1;
+    if (a.vec[temp].val == b.val && a.vec[temp].num == b.num || a.vec[temp+1].val == b.val && a.vec[temp+1].num == b.num) {
+      return res;
+    }
+    else res += 1;
+  }
+  return res;
 }
 void range_arbre_vec(arbrebv_t*);
-void range_arbre_vec(arbrebv_t*){
+void range_arbre_vec(arbrebv_t* a){
 
 }
 
@@ -68,6 +90,7 @@ int main () {
   float test;
   arbre a, b, c;
   arbrebv_t a2, b2, c2;
+  paire_t* ptrv_t;
   
   v1 = 0;
   v2 = 1;
@@ -105,6 +128,7 @@ int main () {
     if (c) printf("num : %d / val : %f\n", c->num, c->val);
     else printf("La valeur test n'a pas été trouvée dans l'arbre.\n");
     printf("Profondeur de c : %d\n", profondeur_noeud_in_arbre(b, c));
+
   }
 
   /*----------------------------------------------------------------*/
@@ -119,6 +143,15 @@ int main () {
     else printf("La valeur %f n'est pas dans l'arbre\n",test);
 
     printf("%d\n",is_in_arbre_vec(a2, test));
+
+    ptrv_t = NULL;
+    ptrv_t = is_noeud_in_arbre_vec(a2, test);
+    if (ptrv_t != NULL) printf("%f est un noeud \n", test);
+    else printf("%f n'est pas un noeud\n", test);
+    
+    printf("La profondeur de test est de : %d\n", profondeur_noeud_in_arbre_vec(a2, *ptrv_t));
+
+    
   }
 }
 
@@ -243,8 +276,7 @@ arbre is_noeud_in_arbre (arbre a, float val) {
 
 int profondeur_noeud_in_arbre(arbre a, arbre noeud){
   int res = 0;
-  if (a)
-  {
+  if (a){
     if (a == noeud) return res;
     else return 1 + MAX(profondeur_noeud_in_arbre(a->sg, noeud), profondeur_noeud_in_arbre(a->sd, noeud));
   }

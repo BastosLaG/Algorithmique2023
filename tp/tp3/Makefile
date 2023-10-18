@@ -1,5 +1,5 @@
 NomPrenom = Bastien_Capiaux_21002589
-version = V.1
+version = V.2
 tp = TP3
 
 prog: $(tp).o
