@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
+#include <math.h>
 
 #define MAX(i, j) (((i) > (j)) ? (i) : (j))
 
@@ -29,6 +30,19 @@ int is_in_arbre (arbre, float);
 arbre is_noeud_in_arbre (arbre, float);
 int profondeur_noeud_in_arbre(arbre, arbre);
 void range_arbre(arbre*);
+void range_arbre(arbre* a){
+  arbre temp;
+  if (*a){
+    // si le sous-arbre gauche est strictement plus petit que le sous-arbre droit
+    if ((*a)->sg && (*a)->sd && (*a)->sg->val < (*a)->sd->val){
+      temp = (*a)->sg;
+      (*a)->sg = (*a)->sd;
+      (*a)->sd = temp;
+    }
+    if ((*a)->sg) range_arbre(&((*a)->sg));
+    if ((*a)->sd) range_arbre(&((*a)->sd));
+  }
+}
 
 /*----------------------------------------------------------------*/
 // arbre V2
@@ -49,53 +63,25 @@ arbrebv_t creeretremplir (int);
 void afficharbrevec (arbrebv_t, int);
 int compte_n_vec(arbrebv_t);
 int is_in_arbre_vec (arbrebv_t, float);
-
 paire_t* is_noeud_in_arbre_vec (arbrebv_t, float);
-paire_t* is_noeud_in_arbre_vec (arbrebv_t a , float n){
-  int i, nbcases, temp;
-  nbcases = a.nbn;
-  for (i = 0; i < nbcases; i++) {
-    temp = (i << 1) + 1;
-    if (a.vec[temp].val == n) {
-      return &a.vec[temp];
-    }
-    else if (a.vec[temp+1].val == n){
-      return &a.vec[temp+1];
-    }
-  }
-  return NULL;
-}
-
 int profondeur_noeud_in_arbre_vec(arbrebv_t, paire_t);
-int profondeur_noeud_in_arbre_vec(arbrebv_t a, paire_t b){
-  int i, nbcases, temp, res;
-  nbcases = a.nbn;
-  res = 0;
-  for (i = 0; i < nbcases; i++) {
-    temp = (i << 1) + 1;
-    if (a.vec[temp].val == b.val && a.vec[temp].num == b.num || a.vec[temp+1].val == b.val && a.vec[temp+1].num == b.num) {
-      return res;
-    }
-    else res += 1;
-  }
-  return res;
-}
 void range_arbre_vec(arbrebv_t*);
-void range_arbre_vec(arbrebv_t* a){
+// void range_arbre_vec(arbrebv_t* a){
 
-}
+// }
 
 int main () {
   int n, v1, v2;
   float test;
   arbre a, b, c;
-  arbrebv_t a2, b2, c2;
+  arbrebv_t a2;
   paire_t* ptrv_t;
   
-  v1 = 0;
-  v2 = 1;
+  v1 = 1;
+  v2 = 0;
   n = 20;
   test = 1.2f;
+
   
   /*---------------------------------------------------------------*/  
   // arbre V1
@@ -248,8 +234,9 @@ int compte_n(arbre a){
 }
 
 int is_in_arbre (arbre a, float val) {
+  float tolerence = 0.01f;
   if(a){
-    if (a->val == val) return 1;
+    if (fabsf(a->val - val) <= tolerence) return 1;
     else {
       return is_in_arbre(a->sg, val) || is_in_arbre(a->sd, val);
     }
@@ -281,20 +268,6 @@ int profondeur_noeud_in_arbre(arbre a, arbre noeud){
     else return 1 + MAX(profondeur_noeud_in_arbre(a->sg, noeud), profondeur_noeud_in_arbre(a->sd, noeud));
   }
   return 0;
-}
-
-void range_arbre(arbre* a){
-  arbre temp;
-  if (*a){
-    // si le sous-arbre gauche est strictement plus petit que le sous-arbre droit
-    if ((*a)->sg && (*a)->sd && (*a)->sg->val < (*a)->sd->val){
-      temp = (*a)->sg;
-      (*a)->sg = (*a)->sd;
-      (*a)->sd = temp;
-    }
-    if ((*a)->sg) range_arbre(&((*a)->sg));
-    if ((*a)->sd) range_arbre(&((*a)->sd));
-  }
 }
 
 /*----------------------------------------------------------------*/
@@ -358,8 +331,31 @@ int is_in_arbre_vec (arbrebv_t a, float n){
   return 0;
 }
 
+paire_t* is_noeud_in_arbre_vec (arbrebv_t a , float n){
+  int i, nbcases, temp;
+  nbcases = a.nbn;
+  for (i = 0; i < nbcases; i++) {
+    temp = (i << 1) + 1;
+    if (a.vec[temp].val == n) {
+      return &a.vec[temp];
+    }
+    else if (a.vec[temp+1].val == n){
+      return &a.vec[temp+1];
+    }
+  }
+  return NULL;
+}
 
-
-
-
-
+int profondeur_noeud_in_arbre_vec(arbrebv_t a, paire_t b){
+  int i, nbcases, temp, res;
+  nbcases = a.nbn;
+  res = 0;
+  for (i = 0; i < nbcases; i++) {
+    temp = (i << 1) + 1;
+    if (a.vec[temp].val == b.val && a.vec[temp].num == b.num || a.vec[temp+1].val == b.val && a.vec[temp+1].num == b.num) {
+      return res;
+    }
+    else res += 1;
+  }
+  return res;
+}
