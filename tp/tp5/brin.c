@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -14,8 +13,8 @@ struct strand {
 typedef struct strand strand;
 
 struct strandgraph {
-  Shu nbs; // nombre sommet
-  Shu nbstr; // nombre arrete = max(nbs)
+  Shu nbs; // nombre sommet total du graphe
+  Shu nbstr; // nombre arrete total du graphe 
   
   short * node; /*first strand*/
   strand * nxt; /*node and next strand*/
