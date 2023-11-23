@@ -1,0 +1,8 @@
+Compile: 
+
+C : 
+    $ make
+    $ ./prog 
+
+Python:
+    $ python3 python_test.py
