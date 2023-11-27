@@ -12,4 +12,4 @@ clean:
 	rm *.o prog
 
 dist: 
-	tar -czvf $(tp)_$(NomPrenom)_$(version).tar.gz $(tp).c makefile
+	tar -czvf $(tp)_$(NomPrenom)_$(version).tar.gz $(tp).c *.py makefile readme

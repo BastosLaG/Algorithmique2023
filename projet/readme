@@ -2,7 +2,7 @@ Compile:
 
 C : 
     $ make
-    $ ./prog 
+    $ time ./prog 
 
 Python:
-    $ python3 python_test.py
+    $ time python3 python_test.py
