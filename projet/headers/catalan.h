@@ -10,14 +10,14 @@
 	};
 	extern const struct Catalan_Func Catalan;
 
-	unsigned long from_binomial_coefficient(const unsigned long N);
-	unsigned long binomial_coefficient_from(const unsigned long N, unsigned long k);
-	unsigned long from_iteration(const unsigned long N);
-	unsigned long from_naive_recursion(const unsigned long N);
+	unsigned long binomial_coefficient(const unsigned long N);
+	unsigned long binomial_coefficient_calcul(const unsigned long N, unsigned long k);
+	unsigned long iterative(const unsigned long N);
+	unsigned long recursive(const unsigned long N);
 	
-	float execution_time(unsigned long (*function_p)(const unsigned long), const unsigned long N);
-	void execution_time_test(unsigned long (*function_p)(const unsigned long));
-	void tests(unsigned long (*function_p)(const unsigned long));
-	char *function_name(void *function_p);
+	float c_execution_time(unsigned long (*function_p)(const unsigned long), const unsigned long N);
+	void c_execution_time_test(unsigned long (*function_p)(const unsigned long));
+	void c_tests(unsigned long (*function_p)(const unsigned long));
+	char *c_function_name(void *function_p);
 
 #endif

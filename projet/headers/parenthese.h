@@ -1,24 +1,29 @@
 #ifndef PARENTHESE_H
 #define PARENTHESE_H
+    
+    struct Parenthese_struct;
 
     typedef struct Parenthese_struct{
         char *str;
         int left;
         int right; 
     }Parenthese_struct;
-    typedef struct Parenthese_Func {
+    
+    struct Parenthese_Func {
         void (*recursive)(int);   
         void (*iterative)(int);
-        float (*tests)(void (*)(int));
-    }Parenthese_Func;
+        void (*tests)(void (*)(int));
+    };
 
-    extern const struct Parenthese_struct Parenthese_S;
-    extern const struct Parenthese_Func Parenthese;
-
+    const struct Parenthese_Func Parenthese;
+    
     void parenthese_rec(int);
     void generateParenthesesRec(char [], int, int, int );
     void generateParenthesesIte(int);
 
-    float test(void (*function_p)(int), int n);
+    float p_execution_time(void (*function_p)(int), int N);
+	void p_execution_time_test(void (*function_p)(int));
+	void p_tests(void (*function_p)(int));
+	char *p_function_name(void *function_p);
 
 #endif
