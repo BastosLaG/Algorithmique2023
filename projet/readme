@@ -1,8 +1,3 @@
-Compile: 
+Auteur: Bastien Capiaux 21002589 étudiant à l'Université Paris 8
 
-C : 
-    $ make
-    $ time ./prog 
-
-Python:
-    $ time python3 python_test.py
+Compilation et execution du projet: $ clear && make && ./prog 

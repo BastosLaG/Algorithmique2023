@@ -110,9 +110,9 @@ void p_tests(void(*function_p)(int))
 char *p_function_name(void *function_p)
 {
 	if (function_p == parenthese_rec)
-		return "Parenthese.recursive";
+		return "Parenthese -> recursive";
 	else if (function_p == generateParenthesesIte)
-		return "Parenthese.iterative";
+		return "Parenthese -> iterative";
 	else
 		return "unknown_function";
 }

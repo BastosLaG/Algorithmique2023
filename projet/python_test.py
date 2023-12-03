@@ -10,6 +10,5 @@ def parenthesize(word_length):
 
     generate_parentheses('', 0, 0)
 
-# Exemple d'utilisation avec un mot de longueur 3
 mot_longueur = 10
 parenthesize(mot_longueur)
