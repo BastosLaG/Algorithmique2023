@@ -12,11 +12,11 @@ source_dir = ./sources
 headers = $(wildcard $(header_dir)/*.h)
 sources = $(wildcard $(source_dir)/*.c)
 # Options du compilateur
-CFLAGS = -Wextra -Wall -I$(header_dir)
+CFLAGS = -Wextra -Wall -I$(header_dir) -lm 
 
 # Règle par défaut pour la construction du programme exécutable
 $(executable): $(main).o parenthese.o catalan.o
-	gcc -o $@ $^
+	gcc -o $@ $^ -lm
 # Règle pour la compilation du fichier source principal
 $(main).o: $(main).c $(headers)
 	gcc -c $(CFLAGS) $<
@@ -30,4 +30,4 @@ clean:
 	rm -f *.o $(executable)
 # Règle pour créer une archive du projet
 dist:
-	tar -czvf $(main)_$(NomPrenom)_$(version).tar.gz $(main).c $(sources) $(headers) makefile readme
+	tar -czvf Catalan_$(NomPrenom)_$(version).tar.gz $(main).c $(sources) $(headers) makefile readme
