@@ -101,14 +101,12 @@ void p_execution_time_test(void(*function_p)(int)) {
 	printf("%s | overall_execution_time: \033[33m%f\033[39ms.\n",p_function_name(function_p),  overall_execution_time);
 }
 
-void p_tests(void(*function_p)(int))
-{
+void p_tests(void(*function_p)(int)) {
 	printf("\nExecution time test:\n");
 	p_execution_time_test(function_p);
 }
 
-char *p_function_name(void *function_p)
-{
+char *p_function_name(void *function_p) {
 	if (function_p == parenthese_rec)
 		return "Parenthese -> recursive";
 	// else if (function_p == generateParenthesesIte)
