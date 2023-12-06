@@ -13,6 +13,8 @@ int main() {
 	printf("\n");
 	Catalan.tests(Catalan.iterative);
 	printf("\n");
+	Catalan.tests(Catalan.generative);
+	printf("\n");
 	Catalan.tests(Catalan.coefficient_binomial);
     return 0;
 }

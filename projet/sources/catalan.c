@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <time.h>
+#include <math.h>
 
 #include "../headers/catalan.h"
 
 const struct Catalan_Func Catalan = {
 	.recursive = recursive,
 	.iterative = iterative,
+	.generative = generative,
 	.coefficient_binomial = binomial_coefficient,
 	.tests = c_tests
 };
@@ -54,6 +56,15 @@ unsigned long long int binomial_coefficient_calcul(int N, int k) {
 	return result;
 }
 
+unsigned long long int generative(int N) {
+    unsigned long long int result = 1;
+	int i; 
+    for (i = 1; i <= N; ++i) {
+        result *= (1 - sqrt(1 - 4.0 / (i * i)));
+    }
+    return result / 2.0;
+}
+
 float c_execution_time(unsigned long long int (*function_p)(int), int N) {
 	long start = clock();
 	function_p(N);
@@ -88,6 +99,8 @@ char *c_function_name(void *function_p) {
 		return "Catalan -> iterative";
 	else if (function_p == recursive)
 		return "Catalan -> recursive";
+	else if (function_p == generative)
+		return "Catalan -> generative";
 	else
 		return "unknown_function";
 }
