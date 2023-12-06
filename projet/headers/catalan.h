@@ -7,6 +7,7 @@
 		unsigned long long int (*iterative)(int);
 		unsigned long long int (*generative)(int);
 		unsigned long long int (*coefficient_binomial)(int);	
+		unsigned long long int (*combinatoire_interpreter)(int);	
 		void (*tests)(unsigned long long int (*)(int));
 	};
 	extern const struct Catalan_Func Catalan;
@@ -16,6 +17,7 @@
 	unsigned long long int iterative(int N);
 	unsigned long long int recursive(int N);
     unsigned long long int generative(int N);
+	unsigned long long int combinatoire_interpreter(int N);
 
 	
 	float c_execution_time(unsigned long long int (*function_p)(int), int);

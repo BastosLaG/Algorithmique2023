@@ -11,6 +11,7 @@ const struct Catalan_Func Catalan = {
 	.iterative = iterative,
 	.generative = generative,
 	.coefficient_binomial = binomial_coefficient,
+	.combinatoire_interpreter = combinatoire_interpreter,
 	.tests = c_tests
 };
 
@@ -65,6 +66,16 @@ unsigned long long int generative(int N) {
     return result / 2.0;
 }
 
+unsigned long long int combinatoire_interpreter(int N) {
+    unsigned long long int result = 1;
+	int i;
+    for (i = 0; i < N; ++i) {
+        result *= (2 * N - i);
+        result /= (i + 1);
+    }
+    return result / (N + 1);
+}
+
 float c_execution_time(unsigned long long int (*function_p)(int), int N) {
 	long start = clock();
 	function_p(N);
@@ -95,6 +106,8 @@ void c_tests(unsigned long long int (*function_p)(int)) {
 char *c_function_name(void *function_p) {
 	if (function_p == binomial_coefficient)
 		return "Catalan -> binomial_coefficient";
+	else if (function_p == combinatoire_interpreter)
+		return "Catalan -> combinatoire_interpreter";
 	else if (function_p == iterative)
 		return "Catalan -> iterative";
 	else if (function_p == recursive)

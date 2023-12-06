@@ -1,5 +1,5 @@
 # Version du programme et NomPrenom
-version = V.1
+version = V_1_1
 NomPrenom = Bastien_Capiaux_21002589
 # Nom du fichier exécutable
 executable = prog
