@@ -7,16 +7,22 @@
 #include "headers/parenthese.h"
 
 int main() {
-    // Parenthese.tests(Parenthese.recursive);
-	// printf("\n");
+    Parenthese.tests(Parenthese.recursive);
+	printf("\n");
     Catalan.tests(Catalan.recursive);
 	printf("\n");
 	Catalan.tests(Catalan.iterative);
 	printf("\n");
+	Catalan.tests(Catalan.factoriel);
+	printf("\n");
 	Catalan.tests(Catalan.combinatoire_interpreter);
 	printf("\n");
-	Catalan.tests(Catalan.coefficient_binomial);
-	printf("\n");
 	Catalan.tests(Catalan.generative);
+	printf("\n");
+	Catalan.tests(Catalan.hypergeometric);
+	printf("\n");
+	Catalan.tests(Catalan.infini);
+	printf("\n");
+	Catalan.tests(Catalan.integral);
     return 0;
 }

@@ -86,19 +86,16 @@ void p_execution_time_test(void(*function_p)(int)) {
 	float overall_execution_time = 0.f;
     float arret_time = 2.0f;
 	unsigned long long int index;
-	for (index = 1; index <= 50; index += 1)
-	{
+	for (index = 0; index <= 50; index += 1) {
 		execut_time = p_execution_time(function_p, index);
-		printf("%s ( %llu ) : \033[33m%f\033[39ms\n\n", p_function_name(function_p), index, execut_time);
-		if (execut_time > arret_time)
-		{
-			printf("( %llu ) : \033[33m%f\033[39m supérieur à \033[33m%f\033[39ms -> arret du test.\n", index, execut_time, arret_time);
-			printf("%s | overall_execution_time: \033[33m%f\033[39ms.\n",p_function_name(function_p),  overall_execution_time);
+		if (execut_time > arret_time) {
+			printf("( %llu ) : \033[33m%f\033[39m supérieur à \033[33m%f\033[39ms -> arret du test.\n", index-1, execut_time, arret_time);
+			printf("%s | 0 -> %lld | overall_execution_time: \033[33m%f\033[39ms.\n",p_function_name(function_p), index-1, overall_execution_time);
 			return;
 		}
 		overall_execution_time += execut_time;
 	}
-	printf("%s | overall_execution_time: \033[33m%f\033[39ms.\n",p_function_name(function_p),  overall_execution_time);
+	printf("%s | 0 -> %lld | overall_execution_time: \033[33m%f\033[39ms.\n",p_function_name(function_p), index-1,overall_execution_time);
 }
 
 void p_tests(void(*function_p)(int)) {
